@@ -20,7 +20,12 @@ while (true)
     {
         case 1:
             Console.Write("Enter task title: ");
-            string title = Console.ReadLine() ?? string.Empty;
+            string title = Console.ReadLine() ?? string.Empty;  // ✅ keep this
+            if (string.IsNullOrWhiteSpace(title))               // ✅ add this
+            {                                                    // ✅ add this
+                Console.WriteLine("Title cannot be empty!");    // ✅ add this
+                break;                                          // ✅ add this
+            }                                                   // ✅ add this
             manager.AddTask(title);
             Console.WriteLine("Task added!");
             break;
@@ -30,7 +35,6 @@ while (true)
             {
                 Console.WriteLine($"{task.Id}. {task.Title} - {(task.IsCompleted ? "Completed" : "Pending")}");
             }
-            
             break;
         case 3:
             var pendingTasks = manager.GetPendingTasks();
