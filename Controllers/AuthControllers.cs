@@ -17,7 +17,6 @@ namespace SmartTaskVaultAPI.Controllers
             if (string.IsNullOrEmpty(body))
                 return "Empty request body";
 
-            // Fix: parse JSON instead of splitting by comma
             var json = JsonSerializer.Deserialize<JsonElement>(body);
 
             if (!json.TryGetProperty("username", out JsonElement userEl) ||

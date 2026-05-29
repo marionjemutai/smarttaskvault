@@ -1,11 +1,13 @@
+
 using MySql.Data.MySqlClient;
 using SmartTaskVaultAPI.Models;
+using SmartTaskVaultAPI.Config;
 
 namespace SmartTaskVaultAPI.Services
 {
     public class TaskService
     {
-        string connStr = "Server=localhost;Database=smartTaskVault;Uid=root;Pwd=3814;";
+        private readonly string connStr = DbConfig.GetConnectionString();
 
         public void AddTask(string title)
         {
@@ -51,7 +53,10 @@ namespace SmartTaskVaultAPI.Services
             using var conn = new MySqlConnection(connStr);
             conn.Open();
 
-            var cmd = new MySqlCommand("SELECT * FROM Tasks WHERE Status='Pending'", conn);
+            var cmd = new MySqlCommand(
+                "SELECT * FROM Tasks WHERE Status='Pending'",
+                conn);
+
             var reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -69,3 +74,4 @@ namespace SmartTaskVaultAPI.Services
         }
     }
 }
+

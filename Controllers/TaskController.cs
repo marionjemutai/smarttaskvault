@@ -26,7 +26,6 @@ namespace SmartTaskVaultAPI.Controllers
             if (string.IsNullOrEmpty(body))
                 return "Empty request body";
 
-            // Fix: parse JSON and extract the "title" field
             var json = JsonSerializer.Deserialize<JsonElement>(body);
 
             if (!json.TryGetProperty("title", out JsonElement titleElement))
